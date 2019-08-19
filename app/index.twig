@@ -87,6 +87,206 @@ file that was distributed with this source code.
             width: 0;
             height: 0;
         }
+
+        .menu-title {
+            font-weight: 700;
+            color: #cf2127;
+            display: inline-block;
+            padding: 13px 26px;
+        }
+
+        .categogy {
+            background-color: #fff;
+            padding: 15px 5px 15px 15px;
+            border-radius: 4px;
+        }
+        .categogy .item {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            margin: 5px 0;
+            padding: 2px 0;
+        }
+
+        .categogy .item span {
+            font-size: 13px;
+            display: inline-block;
+            color: #6d6f71;
+            text-transform: uppercase;
+            padding: 3px 7px 1px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .categogy .item .active {
+            background-color: #959595;
+            color: #fff;
+        }
+
+        .item-row {
+            display: flex;
+            box-sizing: border-box;
+        }
+
+        .item-row .item-img {
+            
+        }
+
+        .item-row .item-info {
+            
+        }
+
+        .item-row .item-price {
+            
+        }
+
+        .item-row .item-add {
+            
+        }
+
+        .bg-content {
+            background-color: #f2f2f2;
+        }
+
+        .menu-detail {
+          padding: 6px 15px;
+          border: 1px solid #ebebeb;
+          border-radius: 4px;
+          background: #fff;
+        }
+
+        .menu-detail .promotions-order {
+          background-color: #fbf9d8;
+          overflow: hidden;
+          margin-left: -15px;
+          margin-right: -15px;
+          border: 1px dashed #575757;
+          padding: 2px 15px 0 89px;
+        }
+
+        .search-items {
+          margin-top: 10px;
+        }
+        .search-items i {
+          position: absolute;
+          padding: 13px;
+          font-weight: 900;
+        }
+        .search-items input {
+          width: 100%;
+          padding: 0 40px;
+          border: 0;
+          border: 1px solid #ededed;
+          height: 40px;
+        }
+
+        .title-menu {
+          text-transform: uppercase;
+          color: #6d6f71;
+          padding: 5px 0 0;
+          margin: 10px 0 20px;
+        }
+        
+        .list-detail .item-row {
+          padding-top: 10px;
+          border-bottom: 1px solid #f5f5f5;
+          padding-bottom: 10px;
+        }
+        
+        .list-detail .item-row .item-img img{
+          width: 60px;
+          height: 60px;
+        }
+
+
+        .list-detail .item-row .item-info {
+          color: #464646;
+          font-size: 16px;
+          cursor: pointer;
+          line-height: 1.3em;
+          font-weight: 700;
+        }
+        .list-detail .item-row .item-price {
+          text-align: right;
+        }
+        .list-detail .item-row .item-price span{
+          font-size: 16px;
+          font-weight: 700;
+          color: #0288d1;
+        }
+        .list-detail .item-row .item-price span::after {
+          content: "đ";
+          font-weight: 400;
+          position: relative;
+          top: -9px;
+          font-size: 10px;
+          right: 0;
+        }
+        .list-detail .item-row .item-add {
+          text-align: right;
+        }
+        .list-detail .item-row .item-add span{
+          display: inline-block;
+          font-size: 20px;
+          cursor: pointer;
+          font-weight: 700;
+          line-height: 20px;
+          width: 22px;
+          height: 22px;
+          background-color: #cf2127;
+          text-align: center;
+          color: #fff;
+          border-radius: 4px;
+        }
+
+        .bill {
+          background-color: #fff;
+          border-radius: 4px;
+          border: 1px solid #ebebeb;
+        }
+        
+        .bill .cart-stats {
+          margin: 7px 10px;
+          font-size: 12px;
+          cursor: pointer;
+          color: #187caa;
+          background: #ebebeb;
+          padding: 2px 8px;
+          border-radius: 2px;
+        }
+
+        .bill .row-bill {
+          background-color: #fbf9d8;
+          font-size: 13px;
+          padding: 4px 10px;
+          border-bottom: 1px solid #ebebeb;
+        }
+
+        .bill .row-bill::before {
+          content: "(*)";
+          color: #cf2127;
+          font-size: 8px;
+          display: inline-block;
+          vertical-align: top;
+          margin-top: 3px;
+        }
+
+        .bill .total-price, .total {
+          display:flex;
+        }
+
+        .btn-red {
+          font-size: 15px;
+          margin: 12px 10px 15px;
+          display: block;
+          width: calc(100% - 20px);
+          background-color: #cf2127;
+          color: #fff;
+          border: 1px solid #cf2127;
+          border-radius: 6px ;
+        }
+
+
     </style>
 {% endblock %}
 
@@ -100,201 +300,137 @@ file that was distributed with this source code.
                 speed: 300
             });
         });
+        $(window).scroll(function(){
+    var aTop = $('.categogy').height();
+    if($(this).scrollTop()>=aTop){
+      $('.categogy, .bill').attr('style','position:fixed;top:0px');
+    }
+    else {
+      $('.categogy, .bill').attr('style','position:relative');
+    }
+  });
     </script>
 {% endblock javascript %}
 
 {% block main %}
-    <section id="home-section" class="hero">
-		  <div class="home-slider js-fullheight owl-carousel">
-	      <div class="slider-item js-fullheight">
-	      	<div class="overlay"></div>
-	        <div class="container-fluid p-0">
-	          <div class="row d-md-flex no-gutters slider-text js-fullheight align-items-center justify-content-end" data-scrollax-parent="true">
-	          	<div class="one-third order-md-last img js-fullheight" style="background-image:url({{ asset('assets/images/bg_1.jpg')}});">
-	          	</div>
-		          <div class="one-forth d-flex js-fullheight align-items-center ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
-		          	<div class="text">
-		          		<span class="subheading">Winkel eCommerce Shop</span>
-		          		<div class="horizontal">
-		          			<h3 class="vr" style="background-image: url({{ asset('assets/images/divider.jpg')}});">Stablished Since 2000</h3>
-				            <h1 class="mb-4 mt-3">Catch Your Own <br><span>Stylish &amp; Look</span></h1>
-				            <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country.</p>
-				            
-				            <p><a href="#" class="btn btn-primary px-5 py-3 mt-3">Discover Now</a></p>
-				          </div>
-		            </div>
-		          </div>
-	        	</div>
-	        </div>
-	      </div>
-	      <div class="slider-item js-fullheight">
-	      	<div class="overlay"></div>
-	        <div class="container-fluid p-0">
-	          <div class="row d-flex no-gutters slider-text js-fullheight align-items-center justify-content-end" data-scrollax-parent="true">
-	          	<div class="one-third order-md-last img js-fullheight" style="background-image:url({{ asset('assets/images/bg_2.jpg')}});">
-	          	</div>
-		          <div class="one-forth d-flex js-fullheight align-items-center ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
-		          	<div class="text">
-		          		<span class="subheading">Winkel eCommerce Shop</span>
-		          		<div class="horizontal">
-		          			<h3 class="vr" style="background-image: url({{ asset('assets/images/divider.jpg')}});">Best eCommerce Online Shop</h3>
-				            <h1 class="mb-4 mt-3">A Thouroughly <span>Modern</span> Woman</h1>
-				            <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country.</p>
-				            <p><a href="#" class="btn btn-primary px-5 py-3 mt-3">Shop Now</a></p>
-				          </div>
-		            </div>
-		          </div>
-	        	</div>
-	        </div>
-	      </div>
-	    </div>
-    </section>
-    <section class="ftco-section ftco-no-pb ftco-no-pt bg-light">
-
-			<div class="container">
-				<div class="row">
-					<div class="col-md-5 p-md-5 img img-2 d-flex justify-content-center align-items-center" style="background-image: url({{asset('assets/images/about.jpg')}} );">
-						<a href="https://vimeo.com/45830194" class="icon popup-vimeo d-flex justify-content-center align-items-center">
-							<span class="icon-play"></span>
-						</a>
-					</div>
-					<div class="col-md-7 py-5 wrap-about pb-md-5 ftco-animate">
-	          <div class="heading-section-bold mb-4 mt-md-5">
-	          	<div class="ml-md-0">
-		            <h2 class="mb-4">Better Way to Ship Your Products</h2>
-	            </div>
-	          </div>
-	          <div class="pb-md-5">
-							<p>But nothing the copy said could convince her and so it didn’t take long until a few insidious Copy Writers ambushed her, made her drunk with Longe and Parole and dragged her into their agency, where they abused her for their.</p>
-							<div class="row ftco-services">
-			          <div class="col-lg-4 text-center d-flex align-self-stretch ftco-animate">
-			            <div class="media block-6 services">
-			              <div class="icon d-flex justify-content-center align-items-center mb-4">
-			            		<span class="flaticon-002-recommended"></span>
-			              </div>
-			              <div class="media-body">
-			                <h3 class="heading">Refund Policy</h3>
-			                <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
-			              </div>
-			            </div>      
-			          </div>
-			          <div class="col-lg-4 text-center d-flex align-self-stretch ftco-animate">
-			            <div class="media block-6 services">
-			              <div class="icon d-flex justify-content-center align-items-center mb-4">
-			            		<span class="flaticon-001-box"></span>
-			              </div>
-			              <div class="media-body">
-			                <h3 class="heading">Premium Packaging</h3>
-			                <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
-			              </div>
-			            </div>    
-			          </div>
-			          <div class="col-lg-4 text-center d-flex align-self-stretch ftco-animate">
-			            <div class="media block-6 services">
-			              <div class="icon d-flex justify-content-center align-items-center mb-4">
-			            		<span class="flaticon-003-medal"></span>
-			              </div>
-			              <div class="media-body">
-			                <h3 class="heading">Superior Quality</h3>
-			                <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
-			              </div>
-			            </div>      
-			          </div>
-			        </div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-
-    <section class="ftco-section testimony-section">
-      <div class="container">
-        <div class="row justify-content-center mb-5 pb-3">
-          <div class="col-md-7 heading-section ftco-animate">
-            <h2 class="mb-4">Our satisfied customer says</h2>
-            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in</p>
-          </div>
-        </div>
-        <div class="row ftco-animate">
-          <div class="col-md-12">
-            <div class="carousel-testimony owl-carousel">
-              <div class="item">
-                <div class="testimony-wrap p-4 pb-5">
-                  <div class="user-img mb-5" style="background-image: url({{asset('assets/images/person_1.jpg')}})">
-                    <span class="quote d-flex align-items-center justify-content-center">
-                      <i class="icon-quote-left"></i>
-                    </span>
-                  </div>
-                  <div class="text">
-                    <p class="mb-5 pl-4 line">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                    <p class="name">Garreth Smith</p>
-                    <span class="position">Marketing Manager</span>
-                  </div>
-                </div>
-              </div>
-              <div class="item active">
-                <div class="testimony-wrap p-4 pb-5">
-                  <div class="user-img mb-5" style="background-image: url({{asset('assets/images/person_2.jpg')}})">
-                    <span class="quote d-flex align-items-center justify-content-center">
-                      <i class="icon-quote-left"></i>
-                    </span>
-                  </div>
-                  <div class="text">
-                    <p class="mb-5 pl-4 line">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                    <p class="name">Garreth Smith</p>
-                    <span class="position">Interface Designer</span>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="testimony-wrap p-4 pb-5">
-                  <div class="user-img mb-5" style="background-image: url({{asset('assets/images/person_3.jpg')}})">
-                    <span class="quote d-flex align-items-center justify-content-center">
-                      <i class="icon-quote-left"></i>
-                    </span>
-                  </div>
-                  <div class="text">
-                    <p class="mb-5 pl-4 line">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                    <p class="name">Garreth Smith</p>
-                    <span class="position">UI Designer</span>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="testimony-wrap p-4 pb-5">
-                  <div class="user-img mb-5" style="background-image: url({{asset('assets/images/person_1.jpg')}})">
-                    <span class="quote d-flex align-items-center justify-content-center">
-                      <i class="icon-quote-left"></i>
-                    </span>
-                  </div>
-                  <div class="text">
-                    <p class="mb-5 pl-4 line">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                    <p class="name">Garreth Smith</p>
-                    <span class="position">Web Developer</span>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="testimony-wrap p-4 pb-5">
-                  <div class="user-img mb-5" style="background-image: url({{asset('assets/images/person_1.jpg')}})">
-                    <span class="quote d-flex align-items-center justify-content-center">
-                      <i class="icon-quote-left"></i>
-                    </span>
-                  </div>
-                  <div class="text">
-                    <p class="mb-5 pl-4 line">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                    <p class="name">Garreth Smith</p>
-                    <span class="position">System Analyst</span>
-                  </div>
-                </div>
-              </div>
+{% set Products = repository('Eccube\\Entity\\Product').createQueryBuilder('p').where('p.id > :id').setParameter('id', 0).getQuery().useResultCache(true, 3600).getResult() %}
+<link rel="stylesheet" href="{{ asset('assets/font-awesome-4.7.0/css/font-awesome.min.css') }}">
+    <div class="container bg-content">
+      <div class="menu-title"> THỰC ĐƠN </div>
+      <div class="row">
+        <div class="col-md-2">
+          <div class="categogy">
+            <div class="item">
+              <span class="active"> MÓN MỚI<span>
+            </div>
+            <div class="item">
+              <span>HOT SALE<span>
+            </div>
+            <div class="item">
+              <span>FRESH TEA<span>
+            </div>
+            <div class="item">
+              <span>FRESH MILK<span>
             </div>
           </div>
         </div>
-      </div>
-    </section>
-
-    <section class="ftco-section ftco-counter img" id="section-counter" style="background-image: url({{asset('assets/images/bg_4.jpg')}});">
+        <div class="col-md-7">
+          <div class="menu-detail">
+            <div class="promotions-order">
+              <div class="promotion-item">Freeship</div>
+              <div class="promotion-item">Airpay</div>
+            </div>
+            <div class="menu-list">
+              <div class="search-items">
+                <i class="fa fa-search"></i>
+                <input type="search" placeholder="Tìm món">
+              </div>
+              <div class="title-menu">Món mới</div>
+              <div class="list-detail">
+              {# {% for Product in Products %}
+                <div class="item-row">
+                  <div class="item-img">
+                    <img src="{{ asset(Product.main_list_image|no_image_product, 'save_image') }}" alt="hình ảnh"/>
+                  </div>
+                  <div class="item-info">
+                    <span>Trà trái cây</span>
+                  </div>
+                  <div class="item-price">
+                    <span> 56,000đ </span>
+                  </div>
+                  <div class="item-add">
+                    <span>+</span>
+                  </div>
+                </div> 
+               {% endfor %}   #}
+                <div class="item-row row">
+                  <div class="item-img col-auto">
+                    <img src="https://images.foody.vn/res/g26/252743/s120x120/3a8a3a0a-4e45-4f2c-1c3a-04730e00f387.jpg" alt="hình ảnh"/>
+                  </div>
+                  <div class="item-info col">
+                    <span>Trà trái cây</span>
+                  </div>
+                  <div class="item-price col-auto">
+                    <span>56,000</span>
+                  </div>
+                  <div class="item-add col-auto">
+                    <span>+</span>
+                  </div>
+                </div>
+                <div class="item-row row">
+                  <div class="item-img col-auto">
+                    <img src="https://images.foody.vn/res/g26/252743/s120x120/fa236ea4-1245-44d9-d2b7-1b16c706decc.jpg" alt="hình ảnh"/>
+                  </div>
+                  <div class="item-info col">
+                    <span>Trà sữa oolong hoa hồng trân châu Dragon</span>
+                  </div>
+                  <div class="item-price col-auto">
+                    <span>53,000</span>
+                  </div>
+                  <div class="item-add col-auto">
+                    <span>+</span>
+                  </div>
+                </div>
+                <div class="item-row row">
+                  <div class="item-img col-auto">
+                    <img src="https://images.foody.vn/res/g26/252743/s120x120/3a8a3a0a-4e45-4f2c-1c3a-04730e00f387.jpg" alt="hình ảnh"/>
+                  </div>
+                  <div class="item-info col">
+                    <span>Trà trái cây</span>
+                  </div>
+                  <div class="item-price col-auto">
+                    <span>56,000</span>
+                  </div>
+                  <div class="item-add col-auto">
+                    <span>+</span>
+                  </div>
+                </div>
+            </div> 
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="bill">
+            <div class="cart-stats">0 phần - 0 người</div>
+            {# <div class="">Đơn hàng tạo bởi</div> #}
+            <div class="total-price">
+              <div class="col">Cộng</div>
+              <div class="col-auto font-weight-bold ">0</div>
+            </div>
+            <div class="row-bill"> Nhập mã khuyến mãi ở bước hoàn tất </div>
+            <div class="total">
+              <div class="col">Tổng cộng</div>
+              <div class="col-auto font-weight-bold">0 </div>
+            </div>
+          <button class="btn-red">
+            <i class="fa fa-check-circle-o"> </i>
+                Đặt trước
+              </button> 
+          </div>
+        </div>
+      </div>  
+    </div>
+    {# <section class="ftco-section ftco-counter img" id="section-counter" style="background-image: url({{asset('assets/images/bg_4.jpg')}});">
     	<div class="container">
     		<div class="row justify-content-center py-5">
     			<div class="col-md-10">
@@ -335,5 +471,5 @@ file that was distributed with this source code.
 	        </div>
         </div>
     	</div>
-    </section>
+    </section> #}
 {% endblock %}
