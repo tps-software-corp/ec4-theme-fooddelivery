@@ -88,7 +88,7 @@ file that was distributed with this source code.
             height: 0;
         }
 
-        .menu-title {
+        .text-menu-top-title {
             font-weight: 700;
             color: #cf2127;
             display: inline-block;
@@ -99,8 +99,10 @@ file that was distributed with this source code.
             background-color: #fff;
             padding: 15px 5px 15px 15px;
             border-radius: 4px;
+            position: sticky;
+            top:0px;
         }
-        .categogy .item {
+        .categogy .item-category {
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -108,7 +110,7 @@ file that was distributed with this source code.
             padding: 2px 0;
         }
 
-        .categogy .item span {
+        .categogy .item-category span {
             font-size: 13px;
             display: inline-block;
             color: #6d6f71;
@@ -118,7 +120,7 @@ file that was distributed with this source code.
             cursor: pointer;
         }
 
-        .categogy .item .active {
+        .categogy .item-category .active {
             background-color: #959595;
             color: #fff;
         }
@@ -165,7 +167,12 @@ file that was distributed with this source code.
         }
 
         .search-items {
-          margin-top: 10px;
+          position: sticky;
+          top: 0px;
+          background: #fff;
+          z-index: 2;
+          padding: 15px 0 10px;
+
         }
         .search-items i {
           position: absolute;
@@ -214,14 +221,14 @@ file that was distributed with this source code.
           font-weight: 700;
           color: #0288d1;
         }
-        .list-detail .item-row .item-price span::after {
+        /* .list-detail .item-row .item-price span::after {
           content: "đ";
           font-weight: 400;
           position: relative;
           top: -9px;
           font-size: 10px;
           right: 0;
-        }
+        } */
         .list-detail .item-row .item-add {
           text-align: right;
         }
@@ -243,6 +250,8 @@ file that was distributed with this source code.
           background-color: #fff;
           border-radius: 4px;
           border: 1px solid #ebebeb;
+          position: sticky;
+          top:0px;
         }
         
         .bill .cart-stats {
@@ -292,6 +301,8 @@ file that was distributed with this source code.
 
 {% block javascript %}
     <script>
+    var current_width = $('.categogy').width();
+    $('.item-category  span').eq(0).addClass('active');
         $(function() {
             $('.main_visual').slick({
                 dots: true,
@@ -299,39 +310,55 @@ file that was distributed with this source code.
                 autoplay: true,
                 speed: 300
             });
+        // Click left menu -> scroll to list menu detail
+        $('.item-category  span').click(function(){
+              var id = $(this).attr('id');
+              $('html,body').animate({
+                  scrollTop: $("#section-group-menu-" + id).offset().top
+              }, '');
+              
         });
+
+        });
+    
+        var position_top_of_menu_title = [...$('.title-menu')].map( a => $(a).offset().top);
+        var temp = 0;
         $(window).scroll(function(){
-    var aTop = $('.categogy').height();
-    if($(this).scrollTop()>=aTop){
-      $('.categogy, .bill').attr('style','position:fixed;top:0px');
-    }
-    else {
-      $('.categogy, .bill').attr('style','position:relative');
-    }
-  });
+        var index_left_menu = position_top_of_menu_title.findIndex( elm => { return elm - $(this).scrollTop() > 0 });
+        if (index_left_menu !== temp && index_left_menu !== -1){
+          temp = index_left_menu;
+          $('.item-category').find('span').removeClass('active');
+          $('.item-category').eq(temp).find('span').addClass('active');
+        }
+
+
+        // var aTop = $('.bill').height();
+        // var navbar = $('ftco-nav').height();
+        // if ($(this).scrollTop()>=aTop){
+        //   $('.categogy').attr('style','position:fixed;top:0px');
+        // }
+        // else {
+        //   $('.categogy').attr('style','position:inital');
+        // }
+      });
+
     </script>
 {% endblock javascript %}
 
 {% block main %}
-{% set Products = repository('Eccube\\Entity\\Product').createQueryBuilder('p').where('p.id > :id').setParameter('id', 0).getQuery().useResultCache(true, 3600).getResult() %}
+
+{% set categories = repository('Eccube\\Entity\\Category').getList() %}
 <link rel="stylesheet" href="{{ asset('assets/font-awesome-4.7.0/css/font-awesome.min.css') }}">
     <div class="container bg-content">
-      <div class="menu-title"> THỰC ĐƠN </div>
+      <div class="text-menu-top-title"> THỰC ĐƠN </div>
       <div class="row">
         <div class="col-md-2">
           <div class="categogy">
-            <div class="item">
-              <span class="active"> MÓN MỚI<span>
+          {% for category in categories %}
+            <div class="item-category">
+              <span id="{{ category.id}}">{{ category.name}}<span>
             </div>
-            <div class="item">
-              <span>HOT SALE<span>
-            </div>
-            <div class="item">
-              <span>FRESH TEA<span>
-            </div>
-            <div class="item">
-              <span>FRESH MILK<span>
-            </div>
+          {% endfor %}
           </div>
         </div>
         <div class="col-md-7">
@@ -345,24 +372,36 @@ file that was distributed with this source code.
                 <i class="fa fa-search"></i>
                 <input type="search" placeholder="Tìm món">
               </div>
-              <div class="title-menu">Món mới</div>
+              {% for category in categories %}
+              {% set array_product = [] %}
+              <div class="title-menu" id="section-group-menu-{{category.id}}">{{ category.name }}</div>
+              {% set Products = repository('Eccube\\Entity\\ProductCategory').createQueryBuilder('pc').Select('p.id').leftJoin('pc.Product', 'p').where('pc.category_id = :id').setParameter('id',category.id ).getQuery().useResultCache(true, 3600).getResult() %}
+                {% for product in Products %}
+                    {% set array_product = array_product|merge([product.id]) %}
+                {% endfor %}
+              {% set Products_details = repository('Eccube\\Entity\\Product').findProductsWithSortedClassCategories(array_product) %}
               <div class="list-detail">
-              {# {% for Product in Products %}
-                <div class="item-row">
-                  <div class="item-img">
-                    <img src="{{ asset(Product.main_list_image|no_image_product, 'save_image') }}" alt="hình ảnh"/>
+              {% for Product_details in Products_details %}
+                <div class="item-row row">
+                  <div class="item-img col-auto">
+                    <img src="{{ asset(Product_details.getMainListImage|no_image_product, 'save_image') }}" alt="hình ảnh"/>
                   </div>
-                  <div class="item-info">
-                    <span>Trà trái cây</span>
+                  <div class="item-info col">
+                    <span>{{ Product_details.name }}</span>
                   </div>
-                  <div class="item-price">
-                    <span> 56,000đ </span>
+                  <div class="item-price col-auto">
+                    <span>{{ Product_details.getPrice02Min|price }}</span>
                   </div>
-                  <div class="item-add">
+                  <div class="item-add col-auto">
                     <span>+</span>
                   </div>
                 </div> 
-               {% endfor %}   #}
+               {% endfor %}  
+              </div>
+              {% endfor %}
+              {# <div class="title-menu">Món mới</div>
+              <div class="list-detail">
+               {% for i in 1..10 %}
                 <div class="item-row row">
                   <div class="item-img col-auto">
                     <img src="https://images.foody.vn/res/g26/252743/s120x120/3a8a3a0a-4e45-4f2c-1c3a-04730e00f387.jpg" alt="hình ảnh"/>
@@ -405,7 +444,8 @@ file that was distributed with this source code.
                     <span>+</span>
                   </div>
                 </div>
-            </div> 
+                  {% endfor %}
+            </div>  #}
             </div>
           </div>
         </div>
