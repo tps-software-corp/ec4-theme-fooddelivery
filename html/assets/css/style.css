@@ -6198,7 +6198,6 @@ textarea.form-control {
 
 .ftco-footer {
   font-size: 14px;
-  padding: 7em 0;
   color: #000000; }
   .ftco-footer .ftco-footer-logo {
     text-transform: uppercase;
@@ -10174,5 +10173,38 @@ a .mlus {
   .table .thead-dark th {
     color: inherit;
     border-color: #dee2e6; } }
-
+  .ec-pager {
+    list-style: none;
+    list-style-type: none;
+    margin: 0 auto;
+    padding: 1em 0;
+    text-align: center; }
+    .ec-pager .ec-pager__item,
+    .ec-pager .ec-pager__item--active {
+      display: inline-block;
+      min-width: 29px;
+      padding: 0 3px 0 2px;
+      text-align: center;
+      position: relative; }
+      .ec-pager .ec-pager__item a,
+      .ec-pager .ec-pager__item--active a {
+        color: inherit;
+        text-decoration: none; }
+      .ec-pager .ec-pager__item a:hover,
+      .ec-pager .ec-pager__item--active a:hover {
+        text-decoration: none; }
+      .ec-pager .ec-pager__item a,
+      .ec-pager .ec-pager__item--active a {
+        color: inherit;
+        display: block;
+        line-height: 1.8;
+        padding: 5px 1em;
+        text-decoration: none; }
+      .ec-pager .ec-pager__item a:hover,
+      .ec-pager .ec-pager__item--active a:hover {
+        color: inherit; }
+    .ec-pager .ec-pager__item--active {
+      background: #F3F3F3; }
+    .ec-pager .ec-pager__item:hover {
+      background: #F3F3F3; }
 /*# sourceMappingURL=maps/style.css.map */

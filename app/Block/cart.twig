@@ -8,58 +8,79 @@ http://www.lockon.co.jp/
 For the full copyright and license information, please view the LICENSE
 file that was distributed with this source code.
 #}
-{% set Carts = get_all_carts() %}
-{% set totalPrice = get_carts_total_price() %}
+<script> 
+$(function() {
+    $('.btn-submit.red').on('click', function() {
+        $('.btn-submit.grey').removeClass('d-none');
+        $('.btn-submit.red').addClass('d-none');
+        setTimeout(() => {
+            $('.btn-submit.grey').addClass('d-none');
+            $('.btn-submit.red').removeClass('d-none');
+        }, 300);
+    })
+    $('.btn-change-quantity').on('click', function(event) {
+            $(this).attr('disabled','');
+            $('.btn-submit.grey').removeClass('d-none');
+            $('.btn-submit.red').addClass('d-none');
+            $.ajax({
+                url: $(this).attr('href'),
+                type: 'PUT',
+                data:  {
+                    'token-for-anchor' : $(this).attr('token-for-anchor'),
+                },
+                dataType: '',
+            }).done(function(data) {
+                $.ajax({
+                    url: "{{ url('block_cart') }}",
+                    type: 'GET',
+                    dataType: 'html'
+                }).done(function(html) {
+                    $('.bill').html(html);
+                }).always(function() {
+                    $('.btn-submit.grey').addClass('d-none');
+                    $('.btn-submit.red').removeClass('d-none');
+                });
+            }).fail(function(data) {
+                alert('{{ 'front.product.add_cart_error'|trans }}');
+            })
+        ;
+    });
+});
+</script>
+
+<div class="cart-stats text-right"><i class="fa fa-trash"></i> Xóa </div>
+{# <div class="">Đơn hàng tạo bởi</div> #}
+<div class="order-card-groups">
 {% set totalQuantity = get_carts_total_quantity() %}
-<div class="ec-cartNaviWrap">
-    <div class="ec-cartNavi">
-        <i class="ec-cartNavi__icon fas fa-shopping-cart">
-            <span class="ec-cartNavi__badge">{{ totalQuantity|number_format }}</span>
-        </i>
-        <div class="ec-cartNavi__label">
-            <div class="ec-cartNavi__price">{{ totalPrice|price }}</div>
-        </div>
+{% set totalCart = 0 %}
+{% for Cart in Carts %}
+    {% for CartItem in Cart.CartItems %}
+        {% set ProductClass = CartItem.ProductClass %}
+        {% set Product = ProductClass.Product %}
+    <div class="order-card-item">
+        <div class="clearfix">
+            <div class="">
+            <button class="fa fa-plus-square btn-plus btn-change-quantity" {{ csrf_token_for_anchor() }} href="{{ url('cart_handle_item', {'operation': 'up', 'productClassId': ProductClass.id}) }}"></button>
+            <span class="number-order">{{ CartItem.quantity|number_format }}</span>
+            <button class="fa fa-minus-square btn-minus btn-change-quantity"  {{ csrf_token_for_anchor() }} href="{{ url('cart_handle_item', {'operation': 'down', 'productClassId': ProductClass.id}) }}"></button>
+            <span class="name-order"> {{ Product.name }}{{ ProductClass.ClassCategory1 ? ' [' ~ ProductClass.ClassCategory1.name ~ ']' : '' }}{{ ProductClass.ClassCategory2 ?' [' ~ ProductClass.ClassCategory2.name ~ ']' : '' }}</span>
+            </div>
+            <span class="price-order">{{ CartItem.total_price|price }}</span>
+            </div>
+            {% set totalCart = totalCart + CartItem.total_price %}
     </div>
-    {% if totalQuantity > 0 %}
-        <div class="ec-cartNaviIsset">
-            {% for Cart in Carts %}
-                {% for CartItem in Cart.CartItems %}
-                    {% set ProductClass = CartItem.ProductClass %}
-                    {% set Product = ProductClass.Product %}
-                    <div class="ec-cartNaviIsset__cart">
-                        <div class="ec-cartNaviIsset__cartImage">
-                            <img src="{{ asset(Product.MainListImage|no_image_product, 'save_image') }}" alt="{{ Product.name }}">
-                        </div>
-                        <div class="ec-cartNaviIsset__cartContent">
-                            <div class="ec-cartNaviIsset__cartContentTitle">{{ Product.name }}
-                                <div class="ec-font-size-1">
-                                    {% if ProductClass.ClassCategory1 and ProductClass.ClassCategory1.id %}
-                                        {{ ProductClass.ClassCategory1.ClassName.name }}：{{ ProductClass.ClassCategory1 }}
-                                    {% endif %}
-                                    {% if ProductClass.ClassCategory2 and ProductClass.ClassCategory2.id %}
-                                        <br>{{ ProductClass.ClassCategory2.ClassName.name }}：{{ ProductClass.ClassCategory2 }}
-                                    {% endif %}
-                                </div>
-                            </div>
-                            <div class="ec-cartNaviIsset__cartContentPrice">
-                                {{ CartItem.price|price }}
-                                <div class="ec-cartNaviIsset__cartContentTax">{{ 'common.tax_include'|trans }}</div>
-                            </div>
-                            <div class="ec-cartNaviIsset__cartContentNumber">{{ 'common.quantity'|trans }} {{ CartItem.quantity|number_format }}</div>
-                        </div>
-                    </div>
-                {% endfor %}
-            {% endfor %}
-            <div class="ec-cartNaviIsset__action">
-                <a class="ec-blockBtn--action" href="{{ url('cart') }}">{{ 'front.block.cart.go_to_cart'|trans }}</a>
-                <a class="ec-blockBtn ec-cartNavi--cancel">{{ 'common.cancel'|trans }}</a>
-            </div>
-        </div>
-    {% else %}
-        <div class="ec-cartNaviNull">
-            <div class="ec-cartNaviNull__message">
-                <p>{{ 'front.block.cart.no_item'|trans }}</p>
-            </div>
-        </div>
-    {% endif %}
+    {% endfor %}
+{% endfor %}
 </div>
+<div class="total-price">
+    <div class="col">Cộng</div>
+    <div class="col-auto font-weight-bold ">{{ totalCart|price }}</div>
+</div>
+<div class="row-bill"> Nhập mã khuyến mãi ở bước hoàn tất </div>
+<div class="total">
+    <div class="col">Tổng cộng</div>
+    <div class="col-auto font-weight-bold text-blue">{{ totalCart|price }}</div>
+</div>
+<button id="cart-submit" {{ totalQuantity == 0 ? 'disabled' : '' }} class="btn btn-submit red" data-toggle="modal" data-target="#shoppingModal"><i class="fa fa-check-circle-o"></i> Đặt trước</button> 
+<button class="btn-submit grey d-none"><i class="fa fa-spin fa-spinner"></i></button>
+

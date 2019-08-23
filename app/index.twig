@@ -241,9 +241,10 @@ file that was distributed with this source code.
           width: 22px;
           height: 22px;
           background-color: #cf2127;
-          text-align: center;
           color: #fff;
           border-radius: 4px;
+          border: none;
+          text-align:center;
         }
 
         .bill {
@@ -252,6 +253,14 @@ file that was distributed with this source code.
           border: 1px solid #ebebeb;
           position: sticky;
           top:0px;
+          color: #464646;
+        }
+
+        .bill .row-bill-restaurant {
+          font-size: 13px;
+          padding: 4px 10px;
+          background-color: #f9f9f9;
+          border-bottom: 1px solid #ebebeb
         }
         
         .bill .cart-stats {
@@ -284,26 +293,227 @@ file that was distributed with this source code.
           display:flex;
         }
 
-        .btn-red {
+        .btn-submit {
           font-size: 15px;
           margin: 12px 10px 15px;
           display: block;
           width: calc(100% - 20px);
-          background-color: #cf2127;
-          color: #fff;
-          border: 1px solid #cf2127;
           border-radius: 6px ;
         }
 
+        .btn-submit.red {
+          background-color: #cf2127;
+          color: #fff;
+          border: 1px solid #cf2127;
+        }
+        .btn-submit.grey {
+          background-color: #b9b5b5;
+          color: #fff;
+          border: 1px solid #b9b5b5;
+        }
 
+        .btn-change-quantity {
+          display: inline-block;
+          font-size: 20px;
+          cursor: pointer;
+          font-weight: 700;
+          line-height: 20px;
+          text-align:center;
+          border: 0;
+          background: transparent;
+          padding: 0;
+        }
+
+        .btn-plus {
+          background-color: #fff;
+          color: #329900;
+        }
+        .number-order {
+          font-size: 13px;
+          color: #cf2127;
+          text-align: center;
+          font-weight: 700;
+          min-width: 17px;
+          display: inline-block;
+          padding: 0;
+          width: auto;
+        }
+        .btn-minus {
+          color: #464646;
+        }
+
+        .order-card-groups {
+        }
+
+        .order-card-item {
+          padding: 6px 10px;
+          border-bottom: 1px solid #ebebeb;
+        }
+        
+        .order-card-item .name-order {
+          max-width: 100%;
+          font-size: 13px;
+          font-weight: 700
+        }
+
+        .order-card-item .price-order {
+          display: block;
+          width: 100%;
+          font-size: 13px;
+          text-align: right;
+        }
+
+        .text-blue {
+          color: #0288d1 !important
+        }
+
+        .btn-continue {
+          font-size: 14px;
+          font-weight: 400;
+          color: #fff;
+          display: block;
+          padding: 3px 25px;
+          background-color: #0288d1;
+          cursor: pointer;
+          transition: all .2s ease;
+          position: absolute;
+          top: 5px;
+          right: 10px;
+          border-radius: 3px;
+        }
+
+        .btn-continue i{
+          margin-left: 5px;
+          font-weight: 900;
+          
+          border-color: #959595;
+        }
+
+        .title-popup-order {
+          font-size: 16px;
+          font-weight: 700;
+          color: #000;
+          margin: 0;
+        }
+
+        .title-popup-order i{
+          float: right;
+          margin-top: 5px;
+        }
+        .order-list .order-item {
+          display: flex;
+        }
+        .order-list .order-item-number {
+          font-size: 12px;
+          text-align: center;
+          color: #fff;
+          display: inline-block;
+          width: 15px;
+          height: 20px;
+          background-color: #0288d1;
+          line-height: 20px;
+          border-radius: 4px;
+          padding-top: 1px;
+          margin-right:5px;
+        }
+        .order-list .order-item-info {
+          flex-grow: 1;
+        }
+        .order-list .order-item-name {
+          font-size: 14px;
+        }
+
+        .order-list .item-order-info {
+          padding-left: 30px;
+          padding-right: 65px
+        }
+        .order-list .order-item-price {
+          
+        }
+        .info-order {
+          border-top: 7px solid #d7d7d7;
+        }
+        .txt-red {
+          color: #cf2127 !important;
+        }
+        .txt-bold {
+          font-weight: 700 !important;
+        }
+        .close {
+          position: absolute;
+          top: -30px;
+          right: 0px;
+          color: white !important;
+          font-weight: 400;
+          opacity: 1;
+        }
+
+        .payment-methods {
+          cursor: pointer;
+          background-color: #fbf9d8;
+          padding: 7px 25px 7px 15px;
+          margin: 0 -15px;
+        }
+
+        .item-method-payment {
+          padding-left: 15px;
+        }
+
+        .submit-order {
+          color: #fff;
+          background-color: #0288d1;
+          font-size: 16px;
+          font-weight: 700;
+          display: block;
+          padding: 10px 0;
+          cursor: pointer;
+          transition: all .2s ease;
+          width: 100%;
+          border-radius: 5px;
+          text-align:  center;
+        }
+        .total-price {
+
+        }
     </style>
 {% endblock %}
 
 {% block javascript %}
-    <script>
-    var current_width = $('.categogy').width();
-    $('.item-category  span').eq(0).addClass('active');
+<script>
+        var current_width = $('.categogy').width();
         $(function() {
+            function loadcart() {
+                $.ajax({
+                    url: "{{ url('block_cart') }}",
+                    type: 'GET',
+                    dataType: 'html'
+                }).done(function(html) {
+                    $('.bill').html(html);
+                });
+            }
+            loadcart();
+             $('#shoppingModal').off('show.bs.modal');
+            $('#shoppingModal').on('show.bs.modal', function() {
+                  $.ajax({
+                    url: '{{url('shopping')}}', 
+                    success: function(res) {
+                      $('#shoppingModal .modal-content').html(res)
+                    },
+                  })
+            });
+
+            $('#shoppingModal').off('hidden.bs.modal');
+            $('#shoppingModal').on('hidden.bs.modal', function() {
+              $('#shoppingModal .modal-content').html('<div class="modal-header"><h3 class="col text-center"><i class="fa fa-spin fa-spinner"></i></h3></div>');
+            });
+            
+            $('#shoppingModal').off('hidden.bs.modal');
+            $('#shoppingCompleteModal').on('hide.bs.modal', function() {
+              $('#shoppingCompleteModal .modal-content').html('<div class="modal-header"><h3 class="col text-center"><i class="fa fa-spin fa-spinner"></i></h3></div>');
+              loadcart();
+            });
+
+
             $('.main_visual').slick({
                 dots: true,
                 arrows: false,
@@ -311,52 +521,114 @@ file that was distributed with this source code.
                 speed: 300
             });
         // Click left menu -> scroll to list menu detail
-        $('.item-category  span').click(function(){
-              var id = $(this).attr('id');
-              $('html,body').animate({
-                  scrollTop: $("#section-group-menu-" + id).offset().top
-              }, '');
-              
+            $('.item-category  span').click(function(){
+                  var id = $(this).attr('id');
+                  $('html,body').animate({
+                      scrollTop: $("#section-group-menu-" + id).offset().top
+                  }, '');   
+            });
+            $('.add-cart').on('click', function(event) {
+                $(this).attr('disabled','');
+                event.preventDefault();
+                // {% if form.classcategory_id1 is defined %}
+                // // 規格1フォームの必須チェック
+                // if ($('#classcategory_id1').val() == '__unselected' || $('#classcategory_id1').val() == '') {
+                //     $('#classcategory_id1')[0].setCustomValidity('{{ 'front.product.product_class_unselected'|trans }}');
+                //     return true;
+                // } else {
+                //     $('#classcategory_id1')[0].setCustomValidity('');
+                // }
+                // {% endif %}
+
+                // {% if form.classcategory_id2 is defined %}
+                // // 規格2フォームの必須チェック
+                // if ($('#classcategory_id2').val() == '__unselected' || $('#classcategory_id2').val() == '') {
+                //     $('#classcategory_id2')[0].setCustomValidity('{{ 'front.product.product_class_unselected'|trans }}');
+                //     return true;
+                // } else {
+                //     $('#classcategory_id2')[0].setCustomValidity('');
+                // }
+                // {% endif %}
+
+                // // 個数フォームのチェック
+                // if ($('#quantity').val() < 1) {
+                //     $('#quantity')[0].setCustomValidity('{{ 'front.product.invalid_quantity'|trans }}');
+                //     return true;
+                // } else {
+                //     $('#quantity')[0].setCustomValidity('');
+                // }
+                event.preventDefault();
+                $form = $(this).parents('form').eq(0);
+                $(this).html('<i class="fa fa-spin fa-spinner"></i>');
+                var _this = this;
+                $.ajax({
+                    url: $form.attr('action'),
+                    type: $form.attr('method'),
+                    data: $form.serialize(),
+                    dataType: 'json',
+                }).done(function(data) {
+                    $(_this).html('+');
+                    loadcart();
+                }).fail(function(data) {
+                    alert('{{ 'front.product.add_cart_error'|trans }}');
+                }).always(function(data) {
+                  
+                })
+            ;
+        });
+
+        $('.btn-change-quantity').on('click', function(event) {
+                $.ajax({
+                    url: $(this).attr('href'),
+                    type: 'GET',
+                    data: '',
+                    dataType: 'json',
+                }).done(function(data) {
+                    // レスポンス内のメッセージをalertで表示
+                    // カートブロックを更新する
+                    $.ajax({
+                        url: "{{ url('block_cart') }}",
+                        type: 'GET',
+                        dataType: 'html'
+                    }).done(function(html) {
+                        $('.bill').html(html);
+                    });
+                }).fail(function(data) {
+                    alert('{{ 'front.product.add_cart_error'|trans }}');
+            });
         });
 
         });
-    
         var position_top_of_menu_title = [...$('.title-menu')].map( a => $(a).offset().top);
         var temp = 0;
+    
         $(window).scroll(function(){
-        var index_left_menu = position_top_of_menu_title.findIndex( elm => { return elm - $(this).scrollTop() > 0 });
-        if (index_left_menu !== temp && index_left_menu !== -1){
-          temp = index_left_menu;
-          $('.item-category').find('span').removeClass('active');
-          $('.item-category').eq(temp).find('span').addClass('active');
-        }
-
-
-        // var aTop = $('.bill').height();
-        // var navbar = $('ftco-nav').height();
-        // if ($(this).scrollTop()>=aTop){
-        //   $('.categogy').attr('style','position:fixed;top:0px');
-        // }
-        // else {
-        //   $('.categogy').attr('style','position:inital');
-        // }
+          var index_left_menu = position_top_of_menu_title.findIndex( elm => { return elm - $(this).scrollTop() > 0 });
+          if (index_left_menu !== temp && index_left_menu !== -1){
+            temp = index_left_menu;
+            $('.item-category').find('span').removeClass('active');
+            $('.item-category').eq(temp).find('span').addClass('active');
+          }
       });
-
     </script>
 {% endblock javascript %}
 
 {% block main %}
 
+{% set Carts = get_all_carts() %}
+{% set totalPrice = get_carts_total_price() %}
+{% set totalQuantity = get_carts_total_quantity() %}
+
 {% set categories = repository('Eccube\\Entity\\Category').getList() %}
-<link rel="stylesheet" href="{{ asset('assets/font-awesome-4.7.0/css/font-awesome.min.css') }}">
+
     <div class="container bg-content">
       <div class="text-menu-top-title"> THỰC ĐƠN </div>
       <div class="row">
         <div class="col-md-2">
           <div class="categogy">
           {% for category in categories %}
-            <div class="item-category">
-              <span id="{{ category.id}}">{{ category.name}}<span>
+            <div class="item-category ">
+              <span id="{{ category.id }}" class="{{loop.index0 == 0 ? 'active' : ''}}">{{ category.name }}</span>
             </div>
           {% endfor %}
           </div>
@@ -373,143 +645,91 @@ file that was distributed with this source code.
                 <input type="search" placeholder="Tìm món">
               </div>
               {% for category in categories %}
-              {% set array_product = [] %}
-              <div class="title-menu" id="section-group-menu-{{category.id}}">{{ category.name }}</div>
-              {% set Products = repository('Eccube\\Entity\\ProductCategory').createQueryBuilder('pc').Select('p.id').leftJoin('pc.Product', 'p').where('pc.category_id = :id').setParameter('id',category.id ).getQuery().useResultCache(true, 3600).getResult() %}
-                {% for product in Products %}
-                    {% set array_product = array_product|merge([product.id]) %}
-                {% endfor %}
-              {% set Products_details = repository('Eccube\\Entity\\Product').findProductsWithSortedClassCategories(array_product) %}
-              <div class="list-detail">
-              {% for Product_details in Products_details %}
-                <div class="item-row row">
-                  <div class="item-img col-auto">
-                    <img src="{{ asset(Product_details.getMainListImage|no_image_product, 'save_image') }}" alt="hình ảnh"/>
-                  </div>
-                  <div class="item-info col">
-                    <span>{{ Product_details.name }}</span>
-                  </div>
-                  <div class="item-price col-auto">
-                    <span>{{ Product_details.getPrice02Min|price }}</span>
-                  </div>
-                  <div class="item-add col-auto">
-                    <span>+</span>
-                  </div>
-                </div> 
-               {% endfor %}  
-              </div>
-              {% endfor %}
-              {# <div class="title-menu">Món mới</div>
-              <div class="list-detail">
-               {% for i in 1..10 %}
-                <div class="item-row row">
-                  <div class="item-img col-auto">
-                    <img src="https://images.foody.vn/res/g26/252743/s120x120/3a8a3a0a-4e45-4f2c-1c3a-04730e00f387.jpg" alt="hình ảnh"/>
-                  </div>
-                  <div class="item-info col">
-                    <span>Trà trái cây</span>
-                  </div>
-                  <div class="item-price col-auto">
-                    <span>56,000</span>
-                  </div>
-                  <div class="item-add col-auto">
-                    <span>+</span>
-                  </div>
-                </div>
-                <div class="item-row row">
-                  <div class="item-img col-auto">
-                    <img src="https://images.foody.vn/res/g26/252743/s120x120/fa236ea4-1245-44d9-d2b7-1b16c706decc.jpg" alt="hình ảnh"/>
-                  </div>
-                  <div class="item-info col">
-                    <span>Trà sữa oolong hoa hồng trân châu Dragon</span>
-                  </div>
-                  <div class="item-price col-auto">
-                    <span>53,000</span>
-                  </div>
-                  <div class="item-add col-auto">
-                    <span>+</span>
-                  </div>
-                </div>
-                <div class="item-row row">
-                  <div class="item-img col-auto">
-                    <img src="https://images.foody.vn/res/g26/252743/s120x120/3a8a3a0a-4e45-4f2c-1c3a-04730e00f387.jpg" alt="hình ảnh"/>
-                  </div>
-                  <div class="item-info col">
-                    <span>Trà trái cây</span>
-                  </div>
-                  <div class="item-price col-auto">
-                    <span>56,000</span>
-                  </div>
-                  <div class="item-add col-auto">
-                    <span>+</span>
-                  </div>
-                </div>
+                {% set array_product = [] %}
+                <div class="title-menu" id="section-group-menu-{{category.id}}">{{ category.name }}</div>
+                {% set ProductsCategory = repository('Eccube\\Entity\\ProductCategory').createQueryBuilder('pc').leftJoin('pc.Product', 'p').where('pc.category_id = :id').setParameter('id',category.id ).getQuery().useResultCache(true, 3600).getResult() %}
+                  <div class="list-detail">
+                   {% for ProductCategory in ProductsCategory %}
+                   {% set product_id = ProductCategory.Product.id %}
+                   {% for class in ProductCategory.Product.ProductClasses %}
+                      <form name="form{{product_id}}" id="productForm{{product_id}}" action="{{ url('product_add_cart', {id:product_id}) }}" method="post">
+                          <div class="item-row row">
+                            <div class="item-img col-auto">
+                              <img src="{{ asset(ProductCategory.Product.getMainListImage|no_image_product, 'save_image') }}" alt="{{ ProductCategory.Product.name }}"/>
+                            </div>
+                            <div class="item-info col">
+                              <span>{{ ProductCategory.Product.name }}{{ class.ClassCategory1 ? ' [' ~ class.ClassCategory1.name ~ ']' : '' }}{{ class.ClassCategory2 ?' [' ~ class.ClassCategory2.name ~ ']' : '' }}</span>
+                            </div>
+                            <div class="item-price col-auto">
+                              <span>{{ class.getPrice02IncTax|price}}</span>
+                            </div>
+                            <input type="hidden" id="product_id{{product_id}}" name="product_id" value="{{product_id}}">
+                            <input type="hidden" id="ProductClass{{product_id}}" name="ProductClass" value="{{ class.id }}">
+                            <input type="hidden" id="quantity1" name="quantity" value="1">
+                            <input type="hidden" name="_token" value="{{ csrf_token('Eccube\\Form\\Type\\AddCartType') }}">
+                            <div class="item-add col-auto">
+                              {% if is_granted('ROLE_USER') %}
+                                <span class="add-cart">+</span>
+                              {% else %}
+                                <a href="{{url('mypage_login')}}"><span class="no-add-cart">+</span></a>
+                              {% endif %}
+                            </div>
+                          </div>
+                          </form>   
+                   {% endfor %}   
                   {% endfor %}
-            </div>  #}
+                  </div>
+              {% endfor %}
             </div>
           </div>
         </div>
         <div class="col-md-3">
           <div class="bill">
-            <div class="cart-stats">0 phần - 0 người</div>
-            {# <div class="">Đơn hàng tạo bởi</div> #}
-            <div class="total-price">
-              <div class="col">Cộng</div>
-              <div class="col-auto font-weight-bold ">0</div>
+            <div style="text-align: center; color: black;">
+              <i class="fa fa-spin fa-spinner"></i>
             </div>
-            <div class="row-bill"> Nhập mã khuyến mãi ở bước hoàn tất </div>
-            <div class="total">
-              <div class="col">Tổng cộng</div>
-              <div class="col-auto font-weight-bold">0 </div>
-            </div>
-          <button class="btn-red">
-            <i class="fa fa-check-circle-o"> </i>
-                Đặt trước
-              </button> 
           </div>
         </div>
       </div>  
     </div>
-    {# <section class="ftco-section ftco-counter img" id="section-counter" style="background-image: url({{asset('assets/images/bg_4.jpg')}});">
-    	<div class="container">
-    		<div class="row justify-content-center py-5">
-    			<div class="col-md-10">
-		    		<div class="row">
-		          <div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
-		            <div class="block-18 text-center">
-		              <div class="text">
-		                <strong class="number" data-number="10000">0</strong>
-		                <span>Happy Customers</span>
-		              </div>
-		            </div>
-		          </div>
-		          <div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
-		            <div class="block-18 text-center">
-		              <div class="text">
-		                <strong class="number" data-number="100">0</strong>
-		                <span>Branches</span>
-		              </div>
-		            </div>
-		          </div>
-		          <div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
-		            <div class="block-18 text-center">
-		              <div class="text">
-		                <strong class="number" data-number="1000">0</strong>
-		                <span>Partner</span>
-		              </div>
-		            </div>
-		          </div>
-		          <div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
-		            <div class="block-18 text-center">
-		              <div class="text">
-		                <strong class="number" data-number="100">0</strong>
-		                <span>Awards</span>
-		              </div>
-		            </div>
-		          </div>
-		        </div>
-	        </div>
-        </div>
-    	</div>
-    </section> #}
+    
+
+
+<!-- Modal -->
+
+<div class="modal fade" id="shoppingModal" tabindex="-1" role="dialog" aria-labelledby="shoppingModalTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="col text-center">
+          <i class="fa fa-spin fa-spinner"></i>
+        </h3>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="shoppingConfirmModal" tabindex="-1" role="dialog" aria-labelledby="shoppingConfirmModalTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+       <div class="modal-header">
+        <h3 class="col text-center">
+          <i class="fa fa-spin fa-spinner"></i>
+        </h3>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="shoppingCompleteModal" tabindex="-1" role="dialog" aria-labelledby="shoppingCompleteModalTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="col text-center">
+          <i class="fa fa-spin fa-spinner"></i>
+        </h3>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}
