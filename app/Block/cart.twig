@@ -47,8 +47,7 @@ $(function() {
     });
 });
 </script>
-
-<div class="cart-stats text-right"><i class="fa fa-trash"></i> Xóa </div>
+<div class="cart-trash cart">Thông tin đơn hàng </div>
 {# <div class="">Đơn hàng tạo bởi</div> #}
 <div class="order-card-groups">
 {% set totalQuantity = get_carts_total_quantity() %}
@@ -72,11 +71,10 @@ $(function() {
     {% endfor %}
 {% endfor %}
 </div>
-<div class="total-price">
+<div class="total-price d-none">
     <div class="col">Cộng</div>
     <div class="col-auto font-weight-bold ">{{ totalCart|price }}</div>
 </div>
-<div class="row-bill"> Nhập mã khuyến mãi ở bước hoàn tất </div>
 <div class="total">
     <div class="col">Tổng cộng</div>
     <div class="col-auto font-weight-bold text-blue">{{ totalCart|price }}</div>
