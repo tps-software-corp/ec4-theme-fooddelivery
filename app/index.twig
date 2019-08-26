@@ -649,36 +649,38 @@ file that was distributed with this source code.
                 {% set ProductsCategory = repository('Eccube\\Entity\\ProductCategory').createQueryBuilder('pc').leftJoin('pc.Product', 'p').where('pc.category_id = :id').setParameter('id',category.id ).getQuery().useResultCache(true, 3600).getResult() %}
                   <div class="list-detail">
                    {% for ProductCategory in ProductsCategory %}
-                   {% set product_id = ProductCategory.Product.id %}
-                   {% for class in ProductCategory.Product.ProductClasses %}
-                      <form name="form{{product_id}}" id="productForm{{product_id}}" action="{{ url('product_add_cart', {id:product_id}) }}" method="post">
-                          <div class="item-row row">
-                            <div class="item-img col-auto">
-                              <img src="{{ asset(ProductCategory.Product.getMainListImage|no_image_product, 'save_image') }}" alt="{{ ProductCategory.Product.name }}"/>
-                            </div>
-                            <div class="item-info col">
-                              <span>{{ ProductCategory.Product.name }}{{ class.ClassCategory1 ? ' [' ~ class.ClassCategory1.name ~ ']' : '' }}{{ class.ClassCategory2 ?' [' ~ class.ClassCategory2.name ~ ']' : '' }}</span>
-                            </div>
-                            <div class="item-price col-auto">
-                              <span>{{ class.getPrice02IncTax|price}}</span>
-                            </div>
-                            <input type="hidden" id="product_id{{product_id}}" name="product_id" value="{{product_id}}">
-                            <input type="hidden" id="ProductClass{{product_id}}" name="ProductClass" value="{{ class.id }}">
-                            <input type="hidden" id="quantity1" name="quantity" value="1">
-                            <input type="hidden" name="_token" value="{{ csrf_token('Eccube\\Form\\Type\\AddCartType') }}">
-                            <div class="item-add col-auto">
-                              {% if is_granted('ROLE_USER') %}
-                                <span class="add-cart">+</span>
-                              {% else %}
-                                <a href="{{url('mypage_login')}}"><span class="no-add-cart">+</span></a>
-                              {% endif %}
-                            </div>
-                          </div>
-                          </form>   
-                   {% endfor %}   
-                  {% endfor %}
+                      {% if ProductCategory.Product.isEnable %}
+                        {% set product_id = ProductCategory.Product.id %}
+                        {% for class in ProductCategory.Product.ProductClasses %}
+                            <form name="form{{product_id}}" id="productForm{{product_id}}" action="{{ url('product_add_cart', {id:product_id}) }}" method="post">
+                                <div class="item-row row">
+                                  <div class="item-img col-auto">
+                                    <img src="{{ asset(ProductCategory.Product.getMainListImage|no_image_product, 'save_image') }}" alt="{{ ProductCategory.Product.name }}"/>
+                                  </div>
+                                  <div class="item-info col">
+                                    <span>{{ ProductCategory.Product.name }}{{ class.ClassCategory1 ? ' [' ~ class.ClassCategory1.name ~ ']' : '' }}{{ class.ClassCategory2 ?' [' ~ class.ClassCategory2.name ~ ']' : '' }}</span>
+                                  </div>
+                                  <div class="item-price col-auto">
+                                    <span>{{ class.getPrice02IncTax|price}}</span>
+                                  </div>
+                                  <input type="hidden" id="product_id{{product_id}}" name="product_id" value="{{product_id}}">
+                                  <input type="hidden" id="ProductClass{{product_id}}" name="ProductClass" value="{{ class.id }}">
+                                  <input type="hidden" id="quantity1" name="quantity" value="1">
+                                  <input type="hidden" name="_token" value="{{ csrf_token('Eccube\\Form\\Type\\AddCartType') }}">
+                                  <div class="item-add col-auto">
+                                    {% if is_granted('ROLE_USER') %}
+                                      <span class="add-cart">+</span>
+                                    {% else %}
+                                      <a href="{{url('mypage_login')}}"><span class="no-add-cart">+</span></a>
+                                    {% endif %}
+                                  </div>
+                                </div>
+                            </form>   
+                        {% endfor %}
+                      {% endif %}
+                    {% endfor %}
                   </div>
-              {% endfor %}
+                {% endfor %}
             </div>
           </div>
         </div>
