@@ -10,6 +10,7 @@ file that was distributed with this source code.
 #}
 <script> 
 $(function() {
+    $('.btn-submit.red').off('click');
     $('.btn-submit.red').on('click', function() {
         $('.btn-submit.grey').removeClass('d-none');
         $('.btn-submit.red').addClass('d-none');
@@ -18,6 +19,7 @@ $(function() {
             $('.btn-submit.red').removeClass('d-none');
         }, 300);
     })
+    $('.btn-change-quantity').off('click');
     $('.btn-change-quantity').on('click', function(event) {
             $(this).attr('disabled','');
             $('.btn-submit.grey').removeClass('d-none');
@@ -47,7 +49,7 @@ $(function() {
     });
 });
 </script>
-<div class="cart-trash cart">Thông tin đơn hàng </div>
+<div class="title-cart-info">Thông tin đơn hàng </div>
 {# <div class="">Đơn hàng tạo bởi</div> #}
 <div class="order-card-groups">
 {% set totalQuantity = get_carts_total_quantity() %}
