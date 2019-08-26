@@ -87,253 +87,650 @@ file that was distributed with this source code.
             width: 0;
             height: 0;
         }
+
+        .text-menu-top-title {
+            font-weight: 700;
+            color: #cf2127;
+            display: inline-block;
+            padding: 13px 26px;
+        }
+
+        .categogy {
+            background-color: #fff;
+            padding: 15px 5px 15px 15px;
+            border-radius: 4px;
+            position: sticky;
+            top:0px;
+        }
+        .categogy .item-category {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            margin: 5px 0;
+            padding: 2px 0;
+        }
+
+        .categogy .item-category span {
+            font-size: 13px;
+            display: inline-block;
+            color: #6d6f71;
+            text-transform: uppercase;
+            padding: 3px 7px 1px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .categogy .item-category .active {
+            background-color: #959595;
+            color: #fff;
+        }
+
+        .item-row {
+            display: flex;
+            box-sizing: border-box;
+        }
+
+        .item-row .item-img {
+            
+        }
+
+        .item-row .item-info {
+            
+        }
+
+        .item-row .item-price {
+            
+        }
+
+        .item-row .item-add {
+            
+        }
+
+        .bg-content {
+            background-color: #f2f2f2;
+        }
+
+        .menu-detail {
+          padding: 6px 15px;
+          border: 1px solid #ebebeb;
+          border-radius: 4px;
+          background: #fff;
+        }
+
+        .menu-detail .promotions-order {
+          background-color: #fbf9d8;
+          overflow: hidden;
+          margin-left: -15px;
+          margin-right: -15px;
+          border: 1px dashed #575757;
+          padding: 2px 15px 0 89px;
+        }
+
+        .search-items {
+          position: sticky;
+          top: 0px;
+          background: #fff;
+          z-index: 2;
+          padding: 15px 0 10px;
+
+        }
+        .search-items i {
+          position: absolute;
+          padding: 13px;
+          font-weight: 900;
+        }
+        .search-items input {
+          width: 100%;
+          padding: 0 40px;
+          border: 0;
+          border: 1px solid #ededed;
+          height: 40px;
+        }
+
+        .title-menu {
+          text-transform: uppercase;
+          color: #6d6f71;
+          padding: 5px 0 0;
+          margin: 10px 0 20px;
+        }
+        
+        .list-detail .item-row {
+          padding-top: 10px;
+          border-bottom: 1px solid #f5f5f5;
+          padding-bottom: 10px;
+        }
+        
+        .list-detail .item-row .item-img img{
+          width: 60px;
+          height: 60px;
+        }
+
+
+        .list-detail .item-row .item-info {
+          color: #464646;
+          font-size: 16px;
+          cursor: pointer;
+          line-height: 1.3em;
+          font-weight: 700;
+        }
+        .list-detail .item-row .item-price {
+          text-align: right;
+        }
+        .list-detail .item-row .item-price span{
+          font-size: 16px;
+          font-weight: 700;
+          color: #0288d1;
+        }
+        /* .list-detail .item-row .item-price span::after {
+          content: "đ";
+          font-weight: 400;
+          position: relative;
+          top: -9px;
+          font-size: 10px;
+          right: 0;
+        } */
+        .list-detail .item-row .item-add {
+          text-align: right;
+        }
+        .list-detail .item-row .item-add span{
+          display: inline-block;
+          font-size: 20px;
+          cursor: pointer;
+          font-weight: 700;
+          line-height: 20px;
+          width: 22px;
+          height: 22px;
+          background-color: #cf2127;
+          color: #fff;
+          border-radius: 4px;
+          border: none;
+          text-align:center;
+        }
+
+        .bill {
+          background-color: #fff;
+          border-radius: 4px;
+          border: 1px solid #ebebeb;
+          position: sticky;
+          top:0px;
+          color: #464646;
+        }
+
+        .bill .row-bill-restaurant {
+          font-size: 13px;
+          padding: 4px 10px;
+          background-color: #f9f9f9;
+          border-bottom: 1px solid #ebebeb
+        }
+        
+        .bill .title-cart-info {
+          margin: 7px 10px;
+          font-size: 12px;
+          cursor: pointer;
+          color: #187caa;
+          background: #ebebeb;
+          padding: 2px 8px;
+          border-radius: 2px;
+        }
+
+        .bill .row-bill {
+          background-color: #fbf9d8;
+          font-size: 13px;
+          padding: 4px 10px;
+          border-bottom: 1px solid #ebebeb;
+        }
+
+        .bill .row-bill::before {
+          content: "(*)";
+          color: #cf2127;
+          font-size: 8px;
+          display: inline-block;
+          vertical-align: top;
+          margin-top: 3px;
+        }
+
+        .bill .total-price, .total {
+          display:flex;
+        }
+
+        .btn-submit {
+          font-size: 15px;
+          margin: 12px 10px 15px;
+          display: block;
+          width: calc(100% - 20px);
+          border-radius: 6px ;
+        }
+
+        .btn-submit.red {
+          background-color: #cf2127;
+          color: #fff;
+          border: 1px solid #cf2127;
+        }
+        .btn-submit.grey {
+          background-color: #b9b5b5;
+          color: #fff;
+          border: 1px solid #b9b5b5;
+        }
+
+        .btn-change-quantity {
+          display: inline-block;
+          font-size: 20px;
+          cursor: pointer;
+          font-weight: 700;
+          line-height: 20px;
+          text-align:center;
+          border: 0;
+          background: transparent;
+          padding: 0;
+        }
+
+        .btn-plus {
+          background-color: #fff;
+          color: #329900;
+        }
+        .number-order {
+          font-size: 13px;
+          color: #cf2127;
+          text-align: center;
+          font-weight: 700;
+          min-width: 17px;
+          display: inline-block;
+          padding: 0;
+          width: auto;
+        }
+        .btn-minus {
+          color: #464646;
+        }
+
+        .order-card-groups {
+        }
+
+        .order-card-item {
+          padding: 6px 10px;
+          border-bottom: 1px solid #ebebeb;
+        }
+        
+        .order-card-item .name-order {
+          max-width: 100%;
+          font-size: 13px;
+          font-weight: 700
+        }
+
+        .order-card-item .price-order {
+          display: block;
+          width: 100%;
+          font-size: 13px;
+          text-align: right;
+        }
+
+        .text-blue {
+          color: #0288d1 !important
+        }
+
+        .btn-continue {
+          font-size: 14px;
+          font-weight: 400;
+          color: #fff;
+          display: block;
+          padding: 3px 25px;
+          background-color: #0288d1;
+          cursor: pointer;
+          transition: all .2s ease;
+          position: absolute;
+          top: 5px;
+          right: 10px;
+          border-radius: 3px;
+        }
+
+        .btn-continue i{
+          margin-left: 5px;
+          font-weight: 900;
+          
+          border-color: #959595;
+        }
+
+        .title-popup-order {
+          font-size: 16px;
+          font-weight: 700;
+          color: #000;
+          margin: 0;
+        }
+
+        .title-popup-order i{
+          float: right;
+          margin-top: 5px;
+        }
+        .order-list .order-item {
+          display: flex;
+        }
+        .order-list .order-item-number {
+          font-size: 12px;
+          text-align: center;
+          color: #fff;
+          display: inline-block;
+          width: 15px;
+          height: 20px;
+          background-color: #0288d1;
+          line-height: 20px;
+          border-radius: 4px;
+          padding-top: 1px;
+          margin-right:5px;
+        }
+        .order-list .order-item-info {
+          flex-grow: 1;
+        }
+        .order-list .order-item-name {
+          font-size: 14px;
+        }
+
+        .order-list .item-order-info {
+          padding-left: 30px;
+          padding-right: 65px
+        }
+        .order-list .order-item-price {
+          
+        }
+        .info-order {
+          border-top: 7px solid #d7d7d7;
+        }
+        .txt-red {
+          color: #cf2127 !important;
+        }
+        .txt-bold {
+          font-weight: 700 !important;
+        }
+        .close {
+          position: absolute;
+          top: -30px;
+          right: 0px;
+          color: white !important;
+          font-weight: 400;
+          opacity: 1;
+        }
+
+        .payment-methods {
+          cursor: pointer;
+          background-color: #fbf9d8;
+          padding: 7px 25px 7px 15px;
+          margin: 0 -15px;
+        }
+
+        .item-method-payment {
+          padding-left: 15px;
+        }
+
+        .submit-order {
+          color: #fff;
+          background-color: #0288d1;
+          font-size: 16px;
+          font-weight: 700;
+          display: block;
+          padding: 10px 0;
+          cursor: pointer;
+          transition: all .2s ease;
+          width: 100%;
+          border-radius: 5px;
+          text-align:  center;
+        }
+        .total-price {
+
+        }
     </style>
 {% endblock %}
 
 {% block javascript %}
-    <script>
+<script>
+        var current_width = $('.categogy').width();
         $(function() {
+            function loadcart() {
+                $.ajax({
+                    url: "{{ url('block_cart') }}",
+                    type: 'GET',
+                    dataType: 'html'
+                }).done(function(html) {
+                    $('.bill').html(html);
+                });
+            }
+            loadcart();
+             $('#shoppingModal').off('show.bs.modal');
+            $('#shoppingModal').on('show.bs.modal', function() {
+                  $.ajax({
+                    url: '{{url('shopping')}}', 
+                    success: function(res) {
+                      $('#shoppingModal .modal-content').html(res)
+                    },
+                  })
+            });
+
+            $('#shoppingModal').off('hidden.bs.modal');
+            $('#shoppingModal').on('hidden.bs.modal', function() {
+              $('#shoppingModal .modal-content').html('<div class="modal-header"><h3 class="col text-center"><i class="fa fa-spin fa-spinner"></i></h3></div>');
+            });
+
+            $('#shoppingModal').off('hidden.bs.modal');
+            $('#shoppingCompleteModal').on('hide.bs.modal', function() {
+              $('#shoppingCompleteModal .modal-content').html('<div class="modal-header"><h3 class="col text-center"><i class="fa fa-spin fa-spinner"></i></h3></div>');
+              loadcart();
+            });
+
+
             $('.main_visual').slick({
                 dots: true,
                 arrows: false,
                 autoplay: true,
                 speed: 300
             });
+        // Click left menu -> scroll to list menu detail
+            $('.item-category  span').click(function(){
+                  var id = $(this).attr('id');
+                  $('html,body').animate({
+                      scrollTop: $("#section-group-menu-" + id).offset().top
+                  }, '');   
+            });
+            $('.add-cart').on('click', function(event) {
+                $(this).attr('disabled','');
+                event.preventDefault();
+                // {% if form.classcategory_id1 is defined %}
+                // // 規格1フォームの必須チェック
+                // if ($('#classcategory_id1').val() == '__unselected' || $('#classcategory_id1').val() == '') {
+                //     $('#classcategory_id1')[0].setCustomValidity('{{ 'front.product.product_class_unselected'|trans }}');
+                //     return true;
+                // } else {
+                //     $('#classcategory_id1')[0].setCustomValidity('');
+                // }
+                // {% endif %}
+
+                // {% if form.classcategory_id2 is defined %}
+                // // 規格2フォームの必須チェック
+                // if ($('#classcategory_id2').val() == '__unselected' || $('#classcategory_id2').val() == '') {
+                //     $('#classcategory_id2')[0].setCustomValidity('{{ 'front.product.product_class_unselected'|trans }}');
+                //     return true;
+                // } else {
+                //     $('#classcategory_id2')[0].setCustomValidity('');
+                // }
+                // {% endif %}
+
+                // // 個数フォームのチェック
+                // if ($('#quantity').val() < 1) {
+                //     $('#quantity')[0].setCustomValidity('{{ 'front.product.invalid_quantity'|trans }}');
+                //     return true;
+                // } else {
+                //     $('#quantity')[0].setCustomValidity('');
+                // }
+                event.preventDefault();
+                $form = $(this).parents('form').eq(0);
+                $(this).html('<i class="fa fa-spin fa-spinner"></i>');
+                var _this = this;
+                $.ajax({
+                    url: $form.attr('action'),
+                    type: $form.attr('method'),
+                    data: $form.serialize(),
+                    dataType: 'json',
+                }).done(function(data) {
+                    $(_this).html('+');
+                    loadcart();
+                }).fail(function(data) {
+                    alert('{{ 'front.product.add_cart_error'|trans }}');
+                }).always(function(data) {
+                  
+                })
+            ;
         });
+
+        $('.btn-change-quantity').on('click', function(event) {
+                $.ajax({
+                    url: $(this).attr('href'),
+                    type: 'GET',
+                    data: '',
+                    dataType: 'json',
+                }).done(function(data) {
+                    // レスポンス内のメッセージをalertで表示
+                    // カートブロックを更新する
+                    $.ajax({
+                        url: "{{ url('block_cart') }}",
+                        type: 'GET',
+                        dataType: 'html'
+                    }).done(function(html) {
+                        $('.bill').html(html);
+                    });
+                }).fail(function(data) {
+                    alert('{{ 'front.product.add_cart_error'|trans }}');
+            });
+        });
+
+        });
+        var position_top_of_menu_title = [...$('.title-menu')].map( a => $(a).offset().top);
+        var temp = 0;
+    
+        $(window).scroll(function(){
+          var index_left_menu = position_top_of_menu_title.findIndex( elm => { return elm - $(this).scrollTop() > 0 });
+          if (index_left_menu !== temp && index_left_menu !== -1){
+            temp = index_left_menu;
+            $('.item-category').find('span').removeClass('active');
+            $('.item-category').eq(temp).find('span').addClass('active');
+          }
+      });
     </script>
 {% endblock javascript %}
 
 {% block main %}
-    <section id="home-section" class="hero">
-		  <div class="home-slider js-fullheight owl-carousel">
-	      <div class="slider-item js-fullheight">
-	      	<div class="overlay"></div>
-	        <div class="container-fluid p-0">
-	          <div class="row d-md-flex no-gutters slider-text js-fullheight align-items-center justify-content-end" data-scrollax-parent="true">
-	          	<div class="one-third order-md-last img js-fullheight" style="background-image:url({{ asset('assets/images/bg_1.jpg')}});">
-	          	</div>
-		          <div class="one-forth d-flex js-fullheight align-items-center ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
-		          	<div class="text">
-		          		<span class="subheading">Winkel eCommerce Shop</span>
-		          		<div class="horizontal">
-		          			<h3 class="vr" style="background-image: url({{ asset('assets/images/divider.jpg')}});">Stablished Since 2000</h3>
-				            <h1 class="mb-4 mt-3">Catch Your Own <br><span>Stylish &amp; Look</span></h1>
-				            <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country.</p>
-				            
-				            <p><a href="#" class="btn btn-primary px-5 py-3 mt-3">Discover Now</a></p>
-				          </div>
-		            </div>
-		          </div>
-	        	</div>
-	        </div>
-	      </div>
-	      <div class="slider-item js-fullheight">
-	      	<div class="overlay"></div>
-	        <div class="container-fluid p-0">
-	          <div class="row d-flex no-gutters slider-text js-fullheight align-items-center justify-content-end" data-scrollax-parent="true">
-	          	<div class="one-third order-md-last img js-fullheight" style="background-image:url({{ asset('assets/images/bg_2.jpg')}});">
-	          	</div>
-		          <div class="one-forth d-flex js-fullheight align-items-center ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
-		          	<div class="text">
-		          		<span class="subheading">Winkel eCommerce Shop</span>
-		          		<div class="horizontal">
-		          			<h3 class="vr" style="background-image: url({{ asset('assets/images/divider.jpg')}});">Best eCommerce Online Shop</h3>
-				            <h1 class="mb-4 mt-3">A Thouroughly <span>Modern</span> Woman</h1>
-				            <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country.</p>
-				            <p><a href="#" class="btn btn-primary px-5 py-3 mt-3">Shop Now</a></p>
-				          </div>
-		            </div>
-		          </div>
-	        	</div>
-	        </div>
-	      </div>
-	    </div>
-    </section>
-    <section class="ftco-section ftco-no-pb ftco-no-pt bg-light">
 
-			<div class="container">
-				<div class="row">
-					<div class="col-md-5 p-md-5 img img-2 d-flex justify-content-center align-items-center" style="background-image: url({{asset('assets/images/about.jpg')}} );">
-						<a href="https://vimeo.com/45830194" class="icon popup-vimeo d-flex justify-content-center align-items-center">
-							<span class="icon-play"></span>
-						</a>
-					</div>
-					<div class="col-md-7 py-5 wrap-about pb-md-5 ftco-animate">
-	          <div class="heading-section-bold mb-4 mt-md-5">
-	          	<div class="ml-md-0">
-		            <h2 class="mb-4">Better Way to Ship Your Products</h2>
-	            </div>
-	          </div>
-	          <div class="pb-md-5">
-							<p>But nothing the copy said could convince her and so it didn’t take long until a few insidious Copy Writers ambushed her, made her drunk with Longe and Parole and dragged her into their agency, where they abused her for their.</p>
-							<div class="row ftco-services">
-			          <div class="col-lg-4 text-center d-flex align-self-stretch ftco-animate">
-			            <div class="media block-6 services">
-			              <div class="icon d-flex justify-content-center align-items-center mb-4">
-			            		<span class="flaticon-002-recommended"></span>
-			              </div>
-			              <div class="media-body">
-			                <h3 class="heading">Refund Policy</h3>
-			                <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
-			              </div>
-			            </div>      
-			          </div>
-			          <div class="col-lg-4 text-center d-flex align-self-stretch ftco-animate">
-			            <div class="media block-6 services">
-			              <div class="icon d-flex justify-content-center align-items-center mb-4">
-			            		<span class="flaticon-001-box"></span>
-			              </div>
-			              <div class="media-body">
-			                <h3 class="heading">Premium Packaging</h3>
-			                <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
-			              </div>
-			            </div>    
-			          </div>
-			          <div class="col-lg-4 text-center d-flex align-self-stretch ftco-animate">
-			            <div class="media block-6 services">
-			              <div class="icon d-flex justify-content-center align-items-center mb-4">
-			            		<span class="flaticon-003-medal"></span>
-			              </div>
-			              <div class="media-body">
-			                <h3 class="heading">Superior Quality</h3>
-			                <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
-			              </div>
-			            </div>      
-			          </div>
-			        </div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
+{% set Carts = get_all_carts() %}
+{% set totalPrice = get_carts_total_price() %}
+{% set totalQuantity = get_carts_total_quantity() %}
 
-    <section class="ftco-section testimony-section">
-      <div class="container">
-        <div class="row justify-content-center mb-5 pb-3">
-          <div class="col-md-7 heading-section ftco-animate">
-            <h2 class="mb-4">Our satisfied customer says</h2>
-            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in</p>
+{% set categories = repository('Eccube\\Entity\\Category').getList() %}
+
+    <div class="container bg-content">
+      <div class="text-menu-top-title"> THỰC ĐƠN </div>
+      <div class="row">
+        <div class="col-md-2">
+          <div class="categogy">
+          {% for category in categories %}
+            <div class="item-category ">
+              <span id="{{ category.id }}" class="{{loop.index0 == 0 ? 'active' : ''}}">{{ category.name }}</span>
+            </div>
+          {% endfor %}
           </div>
         </div>
-        <div class="row ftco-animate">
-          <div class="col-md-12">
-            <div class="carousel-testimony owl-carousel">
-              <div class="item">
-                <div class="testimony-wrap p-4 pb-5">
-                  <div class="user-img mb-5" style="background-image: url({{asset('assets/images/person_1.jpg')}})">
-                    <span class="quote d-flex align-items-center justify-content-center">
-                      <i class="icon-quote-left"></i>
-                    </span>
-                  </div>
-                  <div class="text">
-                    <p class="mb-5 pl-4 line">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                    <p class="name">Garreth Smith</p>
-                    <span class="position">Marketing Manager</span>
-                  </div>
-                </div>
+        <div class="col-md-7">
+          <div class="menu-detail">
+            <div class="promotions-order d-none">
+              <div class="promotion-item">Freeship</div>
+              <div class="promotion-item">Airpay</div>
+            </div>
+            <div class="menu-list">
+              <div class="search-items d-none">
+                <i class="fa fa-search"></i>
+                <input type="search" placeholder="Tìm món">
               </div>
-              <div class="item active">
-                <div class="testimony-wrap p-4 pb-5">
-                  <div class="user-img mb-5" style="background-image: url({{asset('assets/images/person_2.jpg')}})">
-                    <span class="quote d-flex align-items-center justify-content-center">
-                      <i class="icon-quote-left"></i>
-                    </span>
+              {% for category in categories %}
+                <div class="title-menu" id="section-group-menu-{{category.id}}">{{ category.name }}</div>
+                {% set ProductsCategory = repository('Eccube\\Entity\\ProductCategory').createQueryBuilder('pc').leftJoin('pc.Product', 'p').where('pc.category_id = :id').setParameter('id',category.id ).getQuery().useResultCache(true, 3600).getResult() %}
+                  <div class="list-detail">
+                   {% for ProductCategory in ProductsCategory %}
+                      {% if ProductCategory.Product.isEnable %}
+                        {% set product_id = ProductCategory.Product.id %}
+                        {% for class in ProductCategory.Product.ProductClasses %}
+                            <form name="form{{product_id}}" id="productForm{{product_id}}" action="{{ url('product_add_cart', {id:product_id}) }}" method="post">
+                                <div class="item-row row">
+                                  <div class="item-img col-auto">
+                                    <img src="{{ asset(ProductCategory.Product.getMainListImage|no_image_product, 'save_image') }}" alt="{{ ProductCategory.Product.name }}"/>
+                                  </div>
+                                  <div class="item-info col">
+                                    <span>{{ ProductCategory.Product.name }}{{ class.ClassCategory1 ? ' [' ~ class.ClassCategory1.name ~ ']' : '' }}{{ class.ClassCategory2 ?' [' ~ class.ClassCategory2.name ~ ']' : '' }}</span>
+                                  </div>
+                                  <div class="item-price col-auto">
+                                    <span>{{ class.getPrice02IncTax|price}}</span>
+                                  </div>
+                                  <input type="hidden" id="product_id{{product_id}}" name="product_id" value="{{product_id}}">
+                                  <input type="hidden" id="ProductClass{{product_id}}" name="ProductClass" value="{{ class.id }}">
+                                  <input type="hidden" id="quantity1" name="quantity" value="1">
+                                  <input type="hidden" name="_token" value="{{ csrf_token('Eccube\\Form\\Type\\AddCartType') }}">
+                                  <div class="item-add col-auto">
+                                    {% if is_granted('ROLE_USER') %}
+                                      <span class="add-cart">+</span>
+                                    {% else %}
+                                      <a href="{{url('mypage_login')}}"><span class="no-add-cart">+</span></a>
+                                    {% endif %}
+                                  </div>
+                                </div>
+                            </form>   
+                        {% endfor %}
+                      {% endif %}
+                    {% endfor %}
                   </div>
-                  <div class="text">
-                    <p class="mb-5 pl-4 line">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                    <p class="name">Garreth Smith</p>
-                    <span class="position">Interface Designer</span>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="testimony-wrap p-4 pb-5">
-                  <div class="user-img mb-5" style="background-image: url({{asset('assets/images/person_3.jpg')}})">
-                    <span class="quote d-flex align-items-center justify-content-center">
-                      <i class="icon-quote-left"></i>
-                    </span>
-                  </div>
-                  <div class="text">
-                    <p class="mb-5 pl-4 line">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                    <p class="name">Garreth Smith</p>
-                    <span class="position">UI Designer</span>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="testimony-wrap p-4 pb-5">
-                  <div class="user-img mb-5" style="background-image: url({{asset('assets/images/person_1.jpg')}})">
-                    <span class="quote d-flex align-items-center justify-content-center">
-                      <i class="icon-quote-left"></i>
-                    </span>
-                  </div>
-                  <div class="text">
-                    <p class="mb-5 pl-4 line">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                    <p class="name">Garreth Smith</p>
-                    <span class="position">Web Developer</span>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="testimony-wrap p-4 pb-5">
-                  <div class="user-img mb-5" style="background-image: url({{asset('assets/images/person_1.jpg')}})">
-                    <span class="quote d-flex align-items-center justify-content-center">
-                      <i class="icon-quote-left"></i>
-                    </span>
-                  </div>
-                  <div class="text">
-                    <p class="mb-5 pl-4 line">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                    <p class="name">Garreth Smith</p>
-                    <span class="position">System Analyst</span>
-                  </div>
-                </div>
-              </div>
+                {% endfor %}
             </div>
           </div>
         </div>
-      </div>
-    </section>
-
-    <section class="ftco-section ftco-counter img" id="section-counter" style="background-image: url({{asset('assets/images/bg_4.jpg')}});">
-    	<div class="container">
-    		<div class="row justify-content-center py-5">
-    			<div class="col-md-10">
-		    		<div class="row">
-		          <div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
-		            <div class="block-18 text-center">
-		              <div class="text">
-		                <strong class="number" data-number="10000">0</strong>
-		                <span>Happy Customers</span>
-		              </div>
-		            </div>
-		          </div>
-		          <div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
-		            <div class="block-18 text-center">
-		              <div class="text">
-		                <strong class="number" data-number="100">0</strong>
-		                <span>Branches</span>
-		              </div>
-		            </div>
-		          </div>
-		          <div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
-		            <div class="block-18 text-center">
-		              <div class="text">
-		                <strong class="number" data-number="1000">0</strong>
-		                <span>Partner</span>
-		              </div>
-		            </div>
-		          </div>
-		          <div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
-		            <div class="block-18 text-center">
-		              <div class="text">
-		                <strong class="number" data-number="100">0</strong>
-		                <span>Awards</span>
-		              </div>
-		            </div>
-		          </div>
-		        </div>
-	        </div>
+        <div class="col-md-3">
+          <div class="bill">
+            <div style="text-align: center; color: black;">
+              <i class="fa fa-spin fa-spinner"></i>
+            </div>
+          </div>
         </div>
-    	</div>
-    </section>
+      </div>  
+    </div>
+    
+
+
+<!-- Modal -->
+
+<div class="modal fade" id="shoppingModal" tabindex="-1" role="dialog" aria-labelledby="shoppingModalTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="col text-center">
+          <i class="fa fa-spin fa-spinner"></i>
+        </h3>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="shoppingConfirmModal" tabindex="-1" role="dialog" aria-labelledby="shoppingConfirmModalTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+       <div class="modal-header">
+        <h3 class="col text-center">
+          <i class="fa fa-spin fa-spinner"></i>
+        </h3>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="shoppingCompleteModal" tabindex="-1" role="dialog" aria-labelledby="shoppingCompleteModalTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="col text-center">
+          <i class="fa fa-spin fa-spinner"></i>
+        </h3>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}

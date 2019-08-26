@@ -21,27 +21,12 @@ file that was distributed with this source code.
         {% set Categories = repository('Eccube\\Entity\\Category').getList() %}
         <div class="collapse navbar-collapse" id="ftco-nav">
             <ul class="navbar-nav ml-auto">
-                {% for cat in Categories %}
-                    {% if cat.Children.count() > 0 %}
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{cat.name}}</a>
-                            <div class="dropdown-menu" aria-labelledby="dropdown04">
-                                {% for child in cat.Children %}
-                                    <a class="dropdown-item" href="{{url('product_list')}}?category_id={{child.id}}">{{child.name}}</a>
-                                {% endfor %}
-                            </div>
-                        </li>
-                    {% else %}
-                        <li class="nav-item"><a href="{{url('product_list')}}?category_id={{cat.id}}" class="nav-link">{{cat.name}}</a></li>
-                    {% endif %}
-                {% endfor %}
                 {% if is_granted('ROLE_USER') %}
                     <li class="nav-item"><a href="{{ url('mypage') }}" class="nav-link">{{'front.block.login.mypage' | trans}}</a></li>
                     <li class="nav-item"><a href="{{url('logout')}}" class="nav-link">{{ 'front.block.login.logout'| trans}}</a></li>
                 {% else %}
                     <li class="nav-item"><a href="{{url('mypage_login')}}" class="nav-link">{{ 'front.block.login.login'| trans}}</a></li>
                 {% endif %}
-                <li class="nav-item cta cta-colored"><a href="/cart" class="nav-link"><span class="icon-shopping_cart"></span>[{{ totalQuantity|number_format }}]</a></li>
 
             </ul>
         </div>
