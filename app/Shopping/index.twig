@@ -19,7 +19,7 @@
       });
   });
 </script>
-{% if Order.Customer.addr01 or Order.Customer.addr02 is null %}
+{% if (Order.Customer.addr01 is null) or (Order.Customer.addr02 is null) %}
     <script>
         alert('Bạn chưa cài đặt địa chỉ');
         window.location.href = "{{ url('mypage_change') }}";
