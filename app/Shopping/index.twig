@@ -19,6 +19,18 @@
       });
   });
 </script>
+{% if (Order.Customer.addr01 is null) or (Order.Customer.addr02 is null) %}
+    <script>
+        alert('Bạn chưa cài đặt địa chỉ');
+        window.location.href = "{{ url('mypage_change') }}";
+    </script>
+{% else %}
+{% if not app.request.isXmlHttpRequest %}
+   <script>
+      window.location.href = "/";
+   </script>
+{% endif %}
+
 {% set Carts = get_all_carts() %}
 {% set totalPrice = get_carts_total_price() %}
 {% set totalQuantity = get_carts_total_quantity() %}
@@ -162,3 +174,4 @@
         </button>
       </div>
       </form>
+{% endif %}
